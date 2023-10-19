@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./makeup.db"
+}
+
+model Usuario {
+  id                 Int          @id @default(autoincrement())
+  Tipo_Usuario_Id    Int
+  Tipo_Usuario       Tipo_Usuario @relation(fields: [Tipo_Usuario_Id], references: [id])
+  nombre             String
+  apellido           String
+  correo_electronico String       @unique
+  telefono           String
+  contrasena         String
+  Venta              Venta[]
+  Compra             Compra[]
+}
+
+model Tipo_Usuario {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  Descripcion String
+  Usuarios    Usuario[]
+}
+
+model Producto {
+  id             Int              @id @default(autoincrement())
+  Categoria_Id   Int
+  Categoria      Categoria        @relation(fields: [Categoria_Id], references: [id])
+  Nombre         String
+  Descripcion    String
+  Marca_Id       Int
+  Marca          Marca            @relation(fields: [Marca_Id], references: [id])
+  Costo          Decimal
+  Precio         Decimal
+  Inventario     Int
+  Detalle_Venta  Detalle_Venta[]
+  Detalle_Compra Detalle_Compra[]
+}
+
+model Marca {
+  id       Int        @id @default(autoincrement())
+  Nombre   String
+  Producto Producto[]
+}
+
+model Categoria {
+  id          Int        @id @default(autoincrement())
+  Nombre      String
+  Descripcion String
+  Producto    Producto[]
+}
+
+model Venta {
+  id            Int             @id @default(autoincrement())
+  Usuario_Id    Int
+  Usuario       Usuario         @relation(fields: [Usuario_Id], references: [id])
+  Precio_Total  Decimal
+  Fecha_Venta   DateTime
+  Detalle_Venta Detalle_Venta[]
+}
+
+model Detalle_Venta {
+  id          Int      @id @default(autoincrement())
+  Venta_Id    Int
+  Venta       Venta    @relation(fields: [Venta_Id], references: [id])
+  Producto_Id Int
+  Producto    Producto @relation(fields: [Producto_Id], references: [id])
+  Cantidad    Int
+}
+
+model Compra {
+  id             Int              @id @default(autoincrement())
+  Usuario_Id     Int
+  Usuario        Usuario          @relation(fields: [Usuario_Id], references: [id])
+  Costo_Total    Decimal
+  Fecha_Compra   DateTime
+  Detalle_Compra Detalle_Compra[]
+}
+
+model Detalle_Compra {
+  id          Int      @id @default(autoincrement())
+  Compra_Id   Int
+  Compra      Compra   @relation(fields: [Compra_Id], references: [id])
+  Producto_Id Int
+  Producto    Producto @relation(fields: [Producto_Id], references: [id])
+  Cantidad    Int
+}

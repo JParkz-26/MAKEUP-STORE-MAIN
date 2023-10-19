@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\main",
+    "\\prisma",
+    "\\prisma\\migrations",
+    "\\prisma\\migrations\\20230306230642_init",
+    "\\prisma\\migrations\\20230308010333_add_all_models_to_schema_and_relations",
+    "\\prisma\\migrations\\20230509061742_remove_proveedor",
+    "\\renderer",
+    "\\renderer\\components",
+    "\\renderer\\pages"
+  ],
+  "SelectedNode": "\\renderer\\pages\\ticketGenerator.ts",
+  "PreviewInSolutionExplorer": false
+}

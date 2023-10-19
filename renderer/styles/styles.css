@@ -1,0 +1,93 @@
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+    color: white;
+  }
+  
+  .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .cardHover:hover {
+    cursor: pointer;
+    background-color: rgba(179, 172, 172, 0.363);
+    transition: 1s;
+  }
+
+  .carrito {
+  
+    border-radius: 5px;
+    box-shadow: 0 0 0 10px rgba(179, 172, 172, 0.199);
+    height: 80vh;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+
+  .precioTotal{
+    height: 20vh;
+    border-top: 1px solid black;
+    width: 100%;
+   /* position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+    */
+  }
+
+  .productos{
+    overflow-y: hidden;
+    transition: 1s;
+    min-height: 85%;
+  }
+
+  .productos:hover{
+    overflow-y: auto;
+    transition: 3s;
+    
+  }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+.loginLogo {
+  background-image: url("../public/images/NormalLogo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid black;
+
+}
+.login{
+  border: 1px solid black;
+  background-color: rgb(230, 162, 236);
+}
+
+.loginBG{
+  background-image: url("../public/images/fondo3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,0 +1,44 @@
+name: Build/release
+
+on:
+  push:
+    paths:
+      - 'package.json' # only release when version changes
+  workflow_dispatch: # allow manual triggering of action
+  
+env:
+  GH_TOKEN: ${{ secrets.github_token }} # allow electron-builder to publish a draft release  
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install Node.js, NPM and Yarn ⚙️
+        uses: actions/setup-node@master
+        with:
+          node-version: 16
+          cache: "npm"
+      - name: Install dependencies
+        run: npm i
+      - name: Release Windows
+        if: runner.os == 'Windows'
+        run: npm run build:win64
+      - name: Release MacOS
+        if: runner.os == 'macOS'
+        run: npm run build:mac
+      - name: Release Linux
+        if: runner.os == 'Linux'
+        run: npm run build:linux
+      - name: Archive production builds 🚀
+        uses: actions/upload-artifact@v2
+        with:
+          name: makeup-store
+          path: dist/**
